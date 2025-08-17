@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('empleados', function (Blueprint $table) {
             $table->id();
             $table->integer('numero_empleado')->unique();
-            $table->string('nombre');
+            $table->string('nombres');
             $table->string('apellido_paterno');
             $table->string('apellido_materno')->nullable();
             $table->enum('rol', ['chofer', 'cargador', 'auxiliar']);
