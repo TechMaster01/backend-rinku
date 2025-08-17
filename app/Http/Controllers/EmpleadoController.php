@@ -10,29 +10,47 @@ class EmpleadoController extends Controller
     //
     public function obtenerEmpleados()
     {
+        // Obtener todos los empleados
         $empleados = Empleados::all();
 
+        // Verificar si hay empleados registrados
         if ($empleados->isEmpty()) {
             return response()->json(['message' => 'No se encontraron empleados'], 404);
         }
 
+        // Retornar los empleados
         return response()->json($empleados, 200);
     }
 
     public function obtenerEmpleadoPorId($id)
     {
+        // Validación del ID
+        if (!is_numeric($id)) {
+            return response()->json(['message' => 'ID debe ser un número'], 400);
+        }
+
+        // Validación de ID positivo
+        if($id <= 0) {
+            return response()->json(['message' => 'ID debe ser un número positivo'], 400
+            );
+        }
+
+        // Buscar el empleado por ID
         $empleado = Empleados::find($id);
 
+        // Verificar si el empleado existe
         if (!$empleado) {
             return response()->json(['message' => 'Empleado no encontrado'], 404);
         }
 
+        // Retornar el empleado encontrado
         return response()->json($empleado, 200);
     }
 
     public function crearEmpleado(Request $request)
     {
         try {
+            // Validaciones para creación
             $request->validate([
                 'numero_empleado' => 'required|integer|unique:empleados,numero_empleado',
                 'nombres' => 'required|string|max:255',
@@ -42,25 +60,30 @@ class EmpleadoController extends Controller
                 'tipo_empleado' => 'required|in:interno,subcontratado'
             ]);
 
+            // Crear el empleado
             $empleado = Empleados::create($request->all());
             
+            // Retornar respuesta de éxito
             return response()->json([
                 'message' => 'Empleado creado exitosamente',
                 'data' => $empleado
             ], 201);
-        } catch (\Illuminate\Validation\ValidationException $e) {
+        } catch (\Illuminate\Validation\ValidationException $e) { // Capturar errores de validación
+            // Retornar errores de validación
             return response()->json([
                 'message' => 'Error de validación',
                 'errors' => $e->errors()
             ], 422);
             
-        } catch (\Illuminate\Database\QueryException $e) {
+        } catch (\Illuminate\Database\QueryException $e) { // Capturar errores de base de datos
+            // Retornar error de base de datos
             return response()->json([
                 'message' => 'Error al actualizar el empleado',
                 'error' => $e->getMessage()
             ], 500);
             
-        } catch (\Exception $e) {
+        } catch (\Exception $e) { // Capturar cualquier otro error
+            // Retornar error inesperado
             return response()->json([
                 'message' => 'Error inesperado al crear el empleado',
                 'error' => $e->getMessage()
@@ -70,9 +93,21 @@ class EmpleadoController extends Controller
 
     public function actualizarEmpleado(Request $request, $id)
     {
+        // Validación del ID
+        if (!is_numeric($id)) {
+            return response()->json(['message' => 'ID debe ser un número'], 400);
+        }
+
+        // Validación de ID positivo
+        if ($id <= 0) {
+            return response()->json(['message' => 'ID debe ser un número positivo'], 400);
+        }
+
         try {
+            // Validación del ID
             $empleado = Empleados::find($id);
 
+            // Verificar si el empleado existe
             if (!$empleado) {
                 return response()->json(['message' => 'Empleado no encontrado'], 404);
             }
@@ -87,26 +122,31 @@ class EmpleadoController extends Controller
                 'tipo_empleado' => 'sometimes|required|in:interno,subcontratado'
             ]);
 
+            // Actualizar el empleado
             $empleado->update($validatedData);
             
+            // Retornar respuesta de éxito
             return response()->json([
                 'message' => 'Empleado actualizado exitosamente',
                 'data' => $empleado->fresh() // fresh() recarga el modelo desde la BD
             ], 200);
 
-        } catch (\Illuminate\Validation\ValidationException $e) {
+        } catch (\Illuminate\Validation\ValidationException $e) { // Capturar errores de validación
+            // Retornar errores de validación
             return response()->json([
                 'message' => 'Error de validación',
                 'errors' => $e->errors()
             ], 422);
             
-        } catch (\Illuminate\Database\QueryException $e) {
+        } catch (\Illuminate\Database\QueryException $e) { // Capturar errores de base de datos
+            // Retornar error de base de datos
             return response()->json([
                 'message' => 'Error al actualizar el empleado',
                 'error' => $e->getMessage()
             ], 500);
             
-        } catch (\Exception $e) {
+        } catch (\Exception $e) { // Capturar cualquier otro error
+            // Retornar error inesperado
             return response()->json([
                 'message' => 'Error inesperado al actualizar el empleado',
                 'error' => $e->getMessage()
@@ -126,15 +166,21 @@ class EmpleadoController extends Controller
                 return response()->json(['message' => 'ID debe ser un número positivo'], 400);
             }
 
+            // Buscar el empleado por ID
             $empleado = Empleados::find($id);
 
+            // Verificar si el empleado existe
             if (!$empleado) {
                 return response()->json(['message' => 'Empleado no encontrado'], 404);
             }
 
+            // Intentar eliminar el empleado
             $empleado->delete();
+
+            // Retornar respuesta de éxito
             return response()->json(['message' => 'Empleado eliminado con éxito']);
-        } catch (\Illuminate\Database\QueryException $e) {
+        } catch (\Illuminate\Database\QueryException $e) { // Capturar errores de base de datos
+            // Retornar error de base de datos
             return response()->json([
                 'message' => 'Error al eliminar el empleado',
                 'error' => $e->getMessage()
