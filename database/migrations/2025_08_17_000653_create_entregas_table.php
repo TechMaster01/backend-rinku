@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('empleado_id')->constrained('empleados')->onDelete('cascade')->onUpdate('cascade');
             $table->date('fecha');
             $table->integer('cantidad_entregas')->default(0);
-            
+
             $table->timestampsTz();
         });
     }
