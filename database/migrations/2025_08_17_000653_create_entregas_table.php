@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('cantidad_entregas')->default(0);
 
             $table->timestampsTz();
+            $table->unique(['empleado_id', 'fecha'], 'unique_empleado_fecha_entregas');
         });
     }
 

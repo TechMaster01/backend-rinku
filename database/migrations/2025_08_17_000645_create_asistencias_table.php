@@ -19,7 +19,7 @@ return new class extends Migration
             $table->enum('turno_cubierto', ['chofer', 'cargador'])->nullable();
             
             $table->timestampsTz();
-            $table->unique(['empleado_id', 'fecha'], 'unique_empleado_fecha');
+            $table->unique(['empleado_id', 'fecha'], 'unique_empleado_fecha_asistencias');
         });
     }
 
