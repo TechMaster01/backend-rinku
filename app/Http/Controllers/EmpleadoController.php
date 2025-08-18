@@ -32,15 +32,9 @@ class EmpleadoController extends Controller
      */
     public function obtenerEmpleadoPorId($id)
     {
-        // Validación del ID
-        if (!is_numeric($id)) {
-            return response()->json(['message' => 'ID debe ser un número'], 400);
-        }
-
-        // Validación de ID positivo
-        if($id <= 0) {
-            return response()->json(['message' => 'ID debe ser un número positivo'], 400
-            );
+        // Validación rápida del ID
+        if (!is_numeric($id) || (int)$id <= 0) {
+            return response()->json(['message' => 'ID debe ser un número positivo'], 400);
         }
 
         // Buscar el empleado por ID
@@ -112,18 +106,13 @@ class EmpleadoController extends Controller
      */
     public function actualizarEmpleado(Request $request, $id)
     {
-        // Validación del ID
-        if (!is_numeric($id)) {
-            return response()->json(['message' => 'ID debe ser un número'], 400);
-        }
-
-        // Validación de ID positivo
-        if ($id <= 0) {
+        // Validación rápida del ID
+        if (!is_numeric($id) || (int)$id <= 0) {
             return response()->json(['message' => 'ID debe ser un número positivo'], 400);
         }
 
         try {
-            // Validación del ID
+            // Buscamos el empleado por ID
             $empleado = Empleados::find($id);
 
             // Verificar si el empleado existe
@@ -132,7 +121,7 @@ class EmpleadoController extends Controller
             }
 
             // Validaciones para actualización
-            $validatedData = $request->validate([
+            $datosValidados = $request->validate([
                 'numero_empleado' => 'sometimes|required|integer|unique:empleados,numero_empleado,' . $id,
                 'nombres' => 'sometimes|required|string|max:255',
                 'apellido_paterno' => 'sometimes|required|string|max:255',
@@ -142,7 +131,7 @@ class EmpleadoController extends Controller
             ]);
 
             // Actualizar el empleado
-            $empleado->update($validatedData);
+            $empleado->update($datosValidados);
             
             // Retornar respuesta de éxito
             return response()->json([
@@ -181,12 +170,8 @@ class EmpleadoController extends Controller
     public function eliminarEmpleado($id)
     {
         try {
-            // Validación del ID
-            if (!is_numeric($id)) {
-                return response()->json(['message' => 'ID debe ser un número'], 400);
-            }
-            // Validación de ID positivo
-            if($id <= 0) {
+            // Validación rápida del ID
+            if (!is_numeric($id) || (int)$id <= 0) {
                 return response()->json(['message' => 'ID debe ser un número positivo'], 400);
             }
 
