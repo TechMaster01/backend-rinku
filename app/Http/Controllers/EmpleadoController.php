@@ -7,7 +7,10 @@ use Illuminate\Http\Request;
 
 class EmpleadoController extends Controller
 {
-    //
+    /**
+     * @description Obtener todos los empleados
+     * @author Mario Evenezer
+     */
     public function obtenerEmpleados()
     {
         // Obtener todos los empleados
@@ -22,6 +25,11 @@ class EmpleadoController extends Controller
         return response()->json($empleados, 200);
     }
 
+    /**
+     * @description Obtener un empleado por su ID
+     * @author Mario Evenezer
+     * @param int $id (ID del empleado)
+     */
     public function obtenerEmpleadoPorId($id)
     {
         // Validación del ID
@@ -47,6 +55,11 @@ class EmpleadoController extends Controller
         return response()->json($empleado, 200);
     }
 
+    /**
+     * @description Crear un nuevo empleado
+     * @author Mario Evenezer
+     * @param Request $request (Datos del empleado)
+     */
     public function crearEmpleado(Request $request)
     {
         try {
@@ -91,6 +104,12 @@ class EmpleadoController extends Controller
         }
     }
 
+    /**
+     * @description Actualizar un empleado por su ID
+     * @author Mario Evenezer
+     * @param Request $request (Datos para actualizar)
+     * @param int $id (ID del empleado)
+     */
     public function actualizarEmpleado(Request $request, $id)
     {
         // Validación del ID
@@ -117,7 +136,7 @@ class EmpleadoController extends Controller
                 'numero_empleado' => 'sometimes|required|integer|unique:empleados,numero_empleado,' . $id,
                 'nombres' => 'sometimes|required|string|max:255',
                 'apellido_paterno' => 'sometimes|required|string|max:255',
-                'apellido_materno' => 'nullable|string|max:255',
+                'apellido_materno' => 'sometimes|required|nullable|string|max:255',
                 'rol' => 'sometimes|required|in:chofer,cargador,auxiliar',
                 'tipo_empleado' => 'sometimes|required|in:interno,subcontratado'
             ]);
@@ -154,6 +173,11 @@ class EmpleadoController extends Controller
         }
     }
 
+    /**
+     * @description Eliminar un empleado por su ID
+     * @author Mario Evenezer
+     * @param int $id (ID del empleado)
+     */
     public function eliminarEmpleado($id)
     {
         try {
