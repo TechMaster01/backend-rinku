@@ -19,6 +19,7 @@ return new class extends Migration
             $table->decimal('bono_entrega', 10, 2)->default(0);
             $table->decimal('bono_chofer', 10, 2)->default(0);
             $table->decimal('bono_cargador', 10, 2)->default(0);
+            $table->decimal('bono_auxiliar', 10, 2)->default(0);
             $table->decimal('vales', 5, 2)->default(0);
             $table->timestampsTz();
         });
@@ -29,6 +30,7 @@ return new class extends Migration
             'bono_entrega'  => 5.00,
             'bono_chofer'   => 10.00,
             'bono_cargador' => 5.00,
+            'bono_auxiliar' => 0.00,
             'vales'         => 0.04,
             'created_at'    => now(),
             'updated_at'    => now(),

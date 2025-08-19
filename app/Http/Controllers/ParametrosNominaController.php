@@ -49,6 +49,7 @@ class ParametrosNominaController extends Controller
                 'bono_entrega' => 'sometimes|required|numeric|min:0',
                 'bono_chofer' => 'sometimes|required|numeric|min:0',
                 'bono_cargador' => 'sometimes|required|numeric|min:0',
+                'bono_auxiliar' => 'sometimes|required|numeric|min:0',
                 'vales' => 'sometimes|required|numeric|min:0'
             ]);
 
