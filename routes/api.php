@@ -34,3 +34,8 @@ Route::prefix('parametros')->group(function () {
     Route::get('/nomina', [App\Http\Controllers\ParametrosNominaController::class, 'consultarParametrosNomina']);
     Route::put('/nomina/{id}', [App\Http\Controllers\ParametrosNominaController::class, 'actualizarParametrosNomina']);
 });
+
+
+Route::prefix('nomina')->group(function () {
+    Route::get('/empleado/{numero_empleado}/periodo/{año}/{mes}', [App\Http\Controllers\CalcularNominaController::class, 'calcularNomina']);
+});
