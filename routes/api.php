@@ -29,3 +29,8 @@ Route::prefix('entregas')->group(function () {
     Route::delete('/{id}', [App\Http\Controllers\EntregasController::class, 'eliminarEntrega']);
     Route::get('/empleado/{empleado_id}', [App\Http\Controllers\EntregasController::class, 'obtenerEntregasPorEmpleado']);
 });
+
+Route::prefix('parametros')->group(function () {
+    Route::get('/nomina', [App\Http\Controllers\ParametrosNominaController::class, 'consultarParametrosNomina']);
+    Route::put('/nomina/{id}', [App\Http\Controllers\ParametrosNominaController::class, 'actualizarParametrosNomina']);
+});
