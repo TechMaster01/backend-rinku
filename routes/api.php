@@ -20,3 +20,12 @@ Route::prefix('asistencias')->group(function () {
     Route::delete('/{id}', [App\Http\Controllers\AsistenciasController::class, 'eliminarAsistencia']);
     Route::get('/empleado/{empleado_id}', [App\Http\Controllers\AsistenciasController::class, 'obtenerAsistenciasPorEmpleado']);
 });
+
+Route::prefix('entregas')->group(function () {
+    Route::get('/', [App\Http\Controllers\EntregasController::class, 'obtenerEntregas']);
+    Route::get('/{id}', [App\Http\Controllers\EntregasController::class, 'obtenerEntregaPorId']);
+    Route::post('/', [App\Http\Controllers\EntregasController::class, 'crearEntrega']);
+    Route::put('/{id}', [App\Http\Controllers\EntregasController::class, 'actualizarEntrega']);
+    Route::delete('/{id}', [App\Http\Controllers\EntregasController::class, 'eliminarEntrega']);
+    Route::get('/empleado/{empleado_id}', [App\Http\Controllers\EntregasController::class, 'obtenerEntregasPorEmpleado']);
+});
