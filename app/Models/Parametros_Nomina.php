@@ -18,6 +18,7 @@ class Parametros_Nomina extends Model
         'bono_entrega',
         'bono_chofer',
         'bono_cargador',
+        'bono_auxiliar',
         'vales'
     ];
 }
