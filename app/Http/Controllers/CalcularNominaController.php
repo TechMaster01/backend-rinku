@@ -83,9 +83,9 @@ class CalcularNominaController extends Controller
 
         // Calculamos el ISR
         if($sueldoBruto > 16000){
-            $ImpuestoSobreRenta = $sueldoBruto*0.12;
+            $ImpuestoSobreRenta = round($sueldoBruto*0.12, 2);
         } else {
-            $ImpuestoSobreRenta = $sueldoBruto*0.09;
+            $ImpuestoSobreRenta = round($sueldoBruto*0.09, 2);
         }
 
         // Calculamos vales
