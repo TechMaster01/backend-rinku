@@ -70,8 +70,10 @@ php artisan db:seed
 🛠️ Comandos útiles
 
 ```bash
-php artisan serve – Inicia el servidor de desarrollo en http://127.0.0.1:8000
+php artisan serve
 ```
+
+– Inicia el servidor de desarrollo en http://127.0.0.1:8000
 
 🤝 Contribuciones
 
