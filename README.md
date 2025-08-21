@@ -24,13 +24,19 @@ cd backend-rinku
 composer install
 ```
 
-3. Copia el archivo de entorno:
+3. Crea la base de datos en PostgreSQL (desde psql o un cliente como DBeaver):
+
+```sql
+CREATE DATABASE Rinku;
+```
+
+4. Copia el archivo de entorno:
 
 ```bash
 cp .env.example .env
 ```
 
-4. Configura las variables de entorno en el archivo .env:
+5. Configura las variables de entorno en el archivo .env:
 
 ```env
 DB_CONNECTION=pgsql
@@ -43,17 +49,10 @@ DB_PASSWORD=
 
 Asegúrate de colocar el nombre de la base de datos, tu usuario y contraseña de postgreSQL.
 
-
-5. Genera la clave de la aplicación:
+6. Genera la clave de la aplicación:
 
 ```bash
 php artisan key:generate
-```
-
-6. Crea la base de datos en PostgreSQL (desde psql o un cliente como DBeaver):
-
-```sql
-CREATE DATABASE Rinku;
 ```
 
 7. Ejecuta las migraciones:
