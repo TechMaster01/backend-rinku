@@ -50,13 +50,19 @@ Asegúrate de colocar el nombre de la base de datos, tu usuario y contraseña de
 php artisan key:generate
 ```
 
-6. Ejecuta las migraciones:
+6. Crea la base de datos en PostgreSQL (desde psql o un cliente como DBeaver):
+
+```sql
+CREATE DATABASE Rinku;
+```
+
+7. Ejecuta las migraciones:
 
 ```bash
 php artisan migrate
 ```
 
-7. Rueda los seeders para poblar la base de datos:
+8. Rueda los seeders para poblar la base de datos:
 
 ```bash
 php artisan db:seed
