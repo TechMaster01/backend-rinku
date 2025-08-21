@@ -90,7 +90,7 @@ class CalcularNominaController extends Controller
 
         // Calculamos vales
         if ($empleado->tipo_empleado === 'interno'){
-            $Vales = $sueldoBase*$parametros->vales;
+            $Vales = $sueldoBruto*$parametros->vales;
         } else {
             $Vales = 0;
         }
