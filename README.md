@@ -32,14 +32,16 @@ cp .env.example .env
 
 4. Configura las variables de entorno en el archivo .env:
 
+```env
 DB_CONNECTION=pgsql
 DB_HOST=127.0.0.1
 DB_PORT=5432
-DB_DATABASE=Rinku
+DB_DATABASE=
 DB_USERNAME=
 DB_PASSWORD=
+```
 
-Asegúrate de colocar tu usuario y contraseña de la base de datos.
+Asegúrate de colocar el nombre de la base de datos, tu usuario y contraseña de postgreSQL.
 
 
 5. Genera la clave de la aplicación:
